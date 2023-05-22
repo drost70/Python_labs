@@ -1,4 +1,10 @@
-from models.Camera import Camera
+"""
+Digital Camera Module
+
+This module defines the DigitalCamera class, which represents a digital camera.
+"""
+
+from models.camera import Camera
 
 
 class DigitalCamera(Camera):
@@ -34,6 +40,12 @@ class DigitalCamera(Camera):
         self.zoom = zoom
 
     def take_photo(self):
+        """
+        Take a photo using the digital camera.
+
+        Returns:
+            str: A string representing the details of the taken photo.
+        """
         return f"Digital Camera: {self.brand} {self.model}, Lens: {self.lens}," \
                f" Resolution: {self.resolution}, Zoom: {self.zoom}, " \
                f"Memory Card Type: {self.memory_card_type}, Photos Count: {self.photos_count}"
