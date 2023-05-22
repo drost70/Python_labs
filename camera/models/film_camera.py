@@ -1,4 +1,10 @@
-from models.Camera import Camera
+"""
+Film Camera Module
+
+This module defines the FilmCamera class, which represents a film camera.
+"""
+
+from models.camera import Camera
 
 # pylint: disable=too-few-public-methods
 class FilmCamera(Camera):
@@ -15,6 +21,9 @@ class FilmCamera(Camera):
     def take_photo(self):
         """
         Take a photo using the film camera.
+
+        Returns:
+            str: A string representing the details of the taken photo.
         """
         return f"Taking photo with Film Camera: {self.brand} {self.model}, Lens: {self.lens}," \
                f" Film Type: {self.film_type}, Film ISO: {self.film_iso}"
