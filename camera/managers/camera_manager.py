@@ -1,6 +1,12 @@
-from models.ActionCamera import ActionCamera
-from models.DigitalCamera import DigitalCamera
-from models.MirrorlessCamera import MirrorlessCamera
+"""
+Camera Manager
+
+This class represents a camera manager.
+"""
+
+from models.action_camera import ActionCamera
+from models.digital_сamera import DigitalCamera
+from models.mirrorless_camera import MirrorlessCamera
 
 
 class CameraManager:
