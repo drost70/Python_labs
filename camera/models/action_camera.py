@@ -1,5 +1,10 @@
-from models.Camera import Camera
+"""
+Action Camera
 
+This class represents an action camera.It inherits from the Camera class.
+"""
+
+from models.camera import Camera
 
 class ActionCamera(Camera):
     """
@@ -21,6 +26,13 @@ class ActionCamera(Camera):
         self.zoom = zoom
 
     def take_photo(self):
+        """
+        Take a photo using the action camera.
+
+        Returns:
+        str: A string representing the details of the taken photo.
+        """
         return f"Action Camera: {self.brand} {self.model}, Lens: {self.lens}, " \
                f"Resolution: {self.resolution}, Zoom: {self.zoom}, " \
                f"Water Resistant: {self.water_resistant}"
+
