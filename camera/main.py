@@ -1,8 +1,14 @@
-from managers.CameraManager import CameraManager
-from models.ActionCamera import ActionCamera
-from models.DigitalCamera import DigitalCamera
-from models.FilmCamera import FilmCamera
-from models.MirrorlessCamera import MirrorlessCamera
+"""
+Camera Management System
+
+This module demonstrates the functionality of a camera management system.
+"""
+
+from managers.camera_manager import CameraManager
+from models.action_camera import ActionCamera
+from models.digital_сamera import DigitalCamera
+from models.film_camera import FilmCamera
+from models.mirrorless_camera import MirrorlessCamera
 
 
 
@@ -46,3 +52,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
