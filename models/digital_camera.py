@@ -6,6 +6,7 @@ This module defines the DigitalCamera class, which represents a digital camera.
 
 from models.camera import Camera
 
+# pylint: disable=line-too-long
 # pylint: disable=too-many-arguments
 class DigitalCamera(Camera):
     """
@@ -51,3 +52,6 @@ class DigitalCamera(Camera):
             f"Resolution: {self.resolution}, Zoom: {self.zoom}, "
             f"Memory Card Type: {self.memory_card_type}, Photos Count: {self.photos_count}"
         )
+
+    def __str__(self):
+        return f"Digital Camera: {self.brand} {self.model}, Lens: {self.lens}, Resolution: {self.resolution}, Zoom: {self.zoom}, Memory Card Type: {self.memory_card_type}, Photos Count: {self.photos_count}"
