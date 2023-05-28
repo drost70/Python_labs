@@ -37,3 +37,15 @@ class ActionCamera(Camera):
             f"Action Camera: {self.brand} {self.model}, Lens: {self.lens}, "
             f"Resolution: {self.resolution}, Zoom: {self.zoom}, Waterproof: {self.waterproof}"
         )
+
+    def __str__(self):
+        """
+        Return a string representation of the action camera.
+
+        Returns:
+            str: A string representation of the action camera.
+        """
+        return (
+            f"Action Camera: {self.brand} {self.model}, Lens: {self.lens}, "
+            f"Resolution: {self.resolution}, Zoom: {self.zoom}, Waterproof: {self.waterproof}"
+        )
