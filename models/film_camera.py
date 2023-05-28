@@ -4,10 +4,10 @@ Film Camera Module
 This module defines the FilmCamera class, which represents a film camera.
 """
 
-# pylint: disable=too-many-arguments
-# pylint: disable=too-few-public-methods
 from models.camera import Camera
 
+# pylint: disable=too-many-arguments
+# pylint: disable=too-few-public-methods
 class FilmCamera(Camera):
     """
     Class representing a film camera.
@@ -28,5 +28,17 @@ class FilmCamera(Camera):
         """
         return (
             f"Taking photo with Film Camera: {self.brand} {self.model}, Lens: {self.lens},"
+            f" Film Type: {self.film_type}, Film ISO: {self.film_iso}"
+        )
+
+    def __str__(self):
+        """
+        Return a string representation of the film camera.
+
+        Returns:
+            str: A string representation of the film camera.
+        """
+        return (
+            f"Film Camera: {self.brand} {self.model}, Lens: {self.lens},"
             f" Film Type: {self.film_type}, Film ISO: {self.film_iso}"
         )
