@@ -51,3 +51,16 @@ class MirrorlessCamera(Camera):
             f" Resolution: {self.resolution}, Zoom: {self.zoom},"
             f" Memory Card Type: {self.memory_card_type}, Photos Count: {self.photos_count}"
         )
+
+    def __str__(self):
+        """
+        Return a string representation of the mirrorless camera.
+
+        Returns:
+            str: A string representation of the mirrorless camera.
+        """
+        return (
+            f"Digital Camera: {self.brand} {self.model}, Lens: {self.lens},"
+            f" Resolution: {self.resolution}, Zoom: {self.zoom},"
+            f" Memory Card Type: {self.memory_card_type}, Photos Count: {self.photos_count}"
+        )
