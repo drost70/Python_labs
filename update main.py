@@ -3,15 +3,15 @@ Camera Management System
 
 This module demonstrates the functionality of a camera management system.
 """
-# pylint: disable=line-too-long
-# pylint: disable=too-many-locals
 
 from models.digital_сamera import DigitalCamera
 from models.mirrorless_camera import MirrorlessCamera
 from models.film_camera import FilmCamera
 from models.action_camera import ActionCamera
 from managers.camera_manager import CameraManager
+from managers.set_manager import SetManager
 
+# pylint: disable=too-many-locals
 
 def main():
     """
@@ -47,23 +47,29 @@ def main():
         print("Camera index:", index)
         print(camera.model)
 
-    cameras_with_results = manager.get_camera_with_action_result(lambda camera: camera.zoom if hasattr(camera, 'zoom') else None)
+    cameras_with_results = [(camera, camera.zoom) for camera in manager if hasattr(camera, 'zoom')]
     for camera, result in cameras_with_results:
         if not isinstance(camera, FilmCamera):
             print(camera.model)
             print("Zoom value:", result)
 
-    digital_camera_attributes = manager.get_attributes_by_type(str)
+    digital_camera_attributes = manager.get_attributes_by_type(DigitalCamera)
     print("Digital camera attributes:")
     print(digital_camera_attributes)
 
     def resolution_condition(camera):
         return camera.resolution == "24MP"
 
-    resolution_check = manager.check_conditions(resolution_condition)
+    all_check = all(resolution_condition(camera) for camera in manager)
+    any_check = any(resolution_condition(camera) for camera in manager)
     print("Resolution condition check:")
-    print("All cameras:", resolution_check['all'])
-    print("Any camera:", resolution_check['any'])
+    print("All cameras:", all_check)
+    print("Any camera:", any_check)
+
+    set_manager = SetManager(manager)
+    print("Number of items in SetManager:", len(set_manager))
+    for item in set_manager:
+        print(item)
 
 
 if __name__ == "__main__":
