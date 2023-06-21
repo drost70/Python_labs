@@ -5,20 +5,21 @@ This module defines the DigitalCamera class, which represents a digital camera.
 """
 
 from models.camera import Camera
+from decorators.decorators import logged
 
-
+# pylint: disable=line-too-long
+# pylint: disable=too-many-arguments
 class DigitalCamera(Camera):
     """
     Class representing a digital camera.
     """
-
-    # pylint: disable=too-many-arguments
     def __init__(self, brand, model, lens, resolution, zoom, memory_card_type):
         super().__init__(brand, model, lens)
         self.resolution = resolution
         self.zoom = zoom
         self.memory_card_type = memory_card_type
         self.photos_count = 0
+        self.data_set = {"CCD", "CMOS", "BSI"}
 
     def save_photo(self):
         """
@@ -39,14 +40,25 @@ class DigitalCamera(Camera):
         self.resolution = resolution
         self.zoom = zoom
 
+    @logged("file")
     def take_photo(self):
         """
-        Take a photo using the digital camera.
+        Take a photo using the camera and log the details.
 
         Returns:
             str: A string representing the details of the taken photo.
         """
-        return f"Digital Camera: {self.brand} {self.model}, Lens: {self.lens}," \
-               f" Resolution: {self.resolution}, Zoom: {self.zoom}, " \
-               f"Memory Card Type: {self.memory_card_type}, Photos Count: {self.photos_count}"
-      
+        photo_details = (
+            f"Digital Camera: {self.brand} {self.model}, Lens: {self.lens}, "
+            f"Resolution: {self.resolution}, Zoom: {self.zoom}"
+        )
+        if self.resolution < 0 or self.zoom < 0:
+            raise ValueError
+        return photo_details
+
+    def __str__(self):
+        return (
+            f"Digital Camera: {self.brand} {self.model}, Lens: {self.lens}, "
+            f"Resolution: {self.resolution}, Zoom: {self.zoom}, Memory Card Type: {self.memory_card_type},"
+            f" Photos Count: {self.photos_count}"
+        )

@@ -1,29 +1,64 @@
 """
-Film Camera Module
+Digital Camera Module
 
-This module defines the FilmCamera class, which represents a film camera.
+This module defines the DigitalCamera class, which represents a digital camera.
 """
 
 from models.camera import Camera
+from decorators.decorators import logged
 
-# pylint: disable=too-few-public-methods
-class FilmCamera(Camera):
+# pylint: disable=line-too-long
+# pylint: disable=too-many-arguments
+class DigitalCamera(Camera):
     """
-    Class representing a film camera.
+    Class representing a digital camera.
     """
-
-    # pylint: disable=too-many-arguments
-    def __init__(self, brand, model, lens, film_type, film_iso):
+    def __init__(self, brand, model, lens, resolution, zoom, memory_card_type):
         super().__init__(brand, model, lens)
-        self.film_type = film_type
-        self.film_iso = film_iso
+        self.resolution = resolution
+        self.zoom = zoom
+        self.memory_card_type = memory_card_type
+        self.photos_count = 0
+        self.data_set = {"CCD", "CMOS", "BSI"}
 
+    def save_photo(self):
+        """
+        Save a photo taken with the digital camera.
+        """
+        self.photos_count += 1
+
+    def erase_memory(self):
+        """
+        Erase the memory of the digital camera.
+        """
+        self.photos_count = 0
+
+    def change_settings(self, resolution, zoom):
+        """
+        Change the settings of the digital camera.
+        """
+        self.resolution = resolution
+        self.zoom = zoom
+
+    @logged("file")
     def take_photo(self):
         """
-        Take a photo using the film camera.
+        Take a photo using the camera and log the details.
 
         Returns:
             str: A string representing the details of the taken photo.
         """
-        return f"Taking photo with Film Camera: {self.brand} {self.model}, Lens: {self.lens}," \
-               f" Film Type: {self.film_type}, Film ISO: {self.film_iso}"
+        photo_details = (
+            f"Digital Camera: {self.brand} {self.model}, Lens: {self.lens}, "
+            f"Resolution: {self.resolution}, Zoom: {self.zoom}"
+        )
+        if self.resolution < 0 or self.zoom < 0:
+            raise ValueError
+        return photo_details
+
+    def __str__(self):
+        return (
+            f"Digital Camera: {self.brand} {self.model}, Lens: {self.lens}, "
+            f"Resolution: {self.resolution}, Zoom: {self.zoom}, Memory Card Type: {self.memory_card_type},"
+            f" Photos Count: {self.photos_count}"
+        )

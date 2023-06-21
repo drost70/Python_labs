@@ -1,38 +1,58 @@
 """
-Action Camera
+Mirrorless Camera Module
 
-This class represents an action camera.It inherits from the Camera class.
+This module defines the MirrorlessCamera class, which represents a mirrorless camera.
 """
 
+# pylint: disable=too-many-arguments
 from models.camera import Camera
+from decorators.decorators import logged
 
-class ActionCamera(Camera):
+class MirrorlessCamera(Camera):
     """
-    Class representing an action camera.
+    Class representing a mirrorless camera.
     """
-
-    # pylint: disable=too-many-arguments
-    def __init__(self, brand, model, lens, resolution, zoom, water_resistant):
+    def __init__(self, brand, model, lens, resolution, zoom, memory_card_type):
         super().__init__(brand, model, lens)
-        self.resolution = resolution
-        self.zoom = zoom
-        self.water_resistant = water_resistant
+        self.resolution = int(resolution)
+        self.zoom = int(zoom)
+        self.memory_card_type = memory_card_type
+        self.photos_count = 0
+        self.data_set = {"RAW", "JPEG"}
+
+    def save_photo(self):
+        """
+        Save a photo taken with the mirrorless camera.
+        """
+        self.photos_count += 1
+
+    def erase_memory(self):
+        """
+        Erase the memory of the mirrorless camera.
+        """
+        self.photos_count = 0
 
     def change_settings(self, resolution, zoom):
         """
-        Change the settings of the action camera.
+        Change the settings of the mirrorless camera.
         """
         self.resolution = resolution
         self.zoom = zoom
 
+    @logged("file")
     def take_photo(self):
-        """
-        Take a photo using the action camera.
+        photo_details = (
+            f"Digital Camera: {self.brand} {self.model}, Lens: {self.lens}, "
+            f"Resolution: {self.resolution}, Zoom: {self.zoom}"
+        )
+        if self.resolution < 0 or self.zoom < 0:
+            raise ValueError
+        return photo_details
+    
 
-        Returns:
-        str: A string representing the details of the taken photo.
-        """
-        return f"Action Camera: {self.brand} {self.model}, Lens: {self.lens}, " \
-               f"Resolution: {self.resolution}, Zoom: {self.zoom}, " \
-               f"Water Resistant: {self.water_resistant}"
-
+    def __str__(self):
+        return (
+            f"Digital Camera: {self.brand} {self.model}, Lens: {self.lens},"
+            f" Resolution: {self.resolution}, Zoom: {self.zoom},"
+            f" Memory Card Type: {self.memory_card_type}, Photos Count: {self.photos_count}"
+        )
